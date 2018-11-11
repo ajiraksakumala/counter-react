@@ -1,28 +1,67 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './layouts/Header.js';
+import Footer from './layouts/Footer.js';
 
-class App extends Component {
+export default class App extends Component {
+  state = {
+    umur: 23
+  };
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Header/>
+        {/* <Body name="Didik" hobby="Traveling" umur={this.state.umur}/>*/}
+        <Counter/>
+        <Counter/>
+        <Footer/>
       </div>
     );
   }
 }
 
-export default App;
+class Body extends Component {
+  state = {
+    gender: "Male"
+  };
+  render() {
+    return (
+      <div>
+        <h2> Name : { this.props.name } </h2>
+        <h3> Hobby : { this.props.hobby } </h3>
+        <h3> Gender : { this.state.gender } </h3>
+        <h3> Umur : { this.props.umur } </h3>
+      </div>
+    );
+  }
+}
+
+class Counter extends Component {
+  state = {
+    counter: 0
+  };
+
+  plus = () => {
+    this.setState({
+      counter : this.state.counter + 1
+    });
+  };
+
+  minus = () => {
+    if (this.state.counter > 0){
+      this.setState({
+        counter : this.state.counter - 1
+      });
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <h1> { this.state.counter } </h1>
+        <button onClick={ () => this.plus() }> (+) Plus </button>
+        <button onClick={ () => this.minus() }> (-) Minus </button>
+      </div>
+    );
+  }
+}
